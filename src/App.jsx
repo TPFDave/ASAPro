@@ -8,8 +8,9 @@ import SignUp from "./auth/SignUp.jsx";
 import Logout from "./auth/Logout.jsx";
 import ShopSetup from "./setup/ShopSetup.jsx";
 import ShopInfo from "./admin/ShopInfo.jsx";
+import CalendarOptions from "./admin/CalendarOptions.jsx";
+import CalendarRouter from "./calendar/CalendarRouter.jsx";
 
-// ---- UI helpers ---- //
 const Container = ({ children }) => <div className="mx-auto w-full max-w-screen-2xl p-4">{children}</div>;
 
 const Card = ({ children, title, subtitle }) => (
@@ -28,7 +29,6 @@ const Placeholder = ({ title, subtitle }) => (
   </Card>
 );
 
-// ---- Global Navbar (post-auth) ---- //
 const TopNav = () => {
   const [adminOpen, setAdminOpen] = useState(false);
   const navigate = useNavigate();
@@ -117,15 +117,10 @@ const About = () => <Container><Placeholder title="About Us & Updates" subtitle=
 
 // ---- Protected screens ---- //
 const Dashboard = () => <Container><Placeholder title="Account Dashboard" subtitle="KPIs: today’s appts, approvals, inspections in-progress."/></Container>;
-const Calendar = () => <Container><Placeholder title="Calendar" subtitle="Day/Bay drag-and-drop appointments."/></Container>;
 const CheckIn = () => <Container><Placeholder title="Check-In" subtitle="Customer/vehicle intake with VIN scan."/></Container>;
 const Inspections = () => <Container><Placeholder title="Inspections" subtitle="Mobile-first inspections, photo capture."/></Container>;
 const ROManager = () => <Container><Placeholder title="RO Manager" subtitle="Estimates, approvals, repair orders."/></Container>;
 const Customers = () => <Container><Placeholder title="Customer Database" subtitle="CRM with vehicles & history."/></Container>;
-
-// Admin submenu pages
-const AdminShop = () => <Container><Placeholder title="Admin — Shop Info" subtitle="Branding, hours, bays, contact."/></Container>;
-const AdminCalendar = () => <Container><Placeholder title="Admin — Calendar Options" subtitle="Working hours, bays, statuses."/></Container>;
 const AdminUsers = () => <Container><Placeholder title="Admin — Users" subtitle="Create accounts, roles, access."/></Container>;
 const AdminPayroll = () => <Container><Placeholder title="Admin — Payroll" subtitle="Time clock reports, adjustments, export."/></Container>;
 const AdminPlan = () => <Container><Placeholder title="Admin — Plan Options" subtitle="Subscription, limits, invoices."/></Container>;
@@ -144,7 +139,10 @@ export default function App() {
         {/* Authenticated */}
         <Route path="/setup" element={<RequireAuth><ShopSetup/></RequireAuth>} />
         <Route path="/dashboard" element={<RequireAuth><><TopNav/><Dashboard/></></RequireAuth>} />
-        <Route path="/calendar" element={<RequireAuth><><TopNav/><Calendar/></></RequireAuth>} />
+
+        {/* Calendar: uses Admin setting via CalendarRouter */}
+        <Route path="/calendar" element={<RequireAuth><><TopNav/><CalendarRouter/></></RequireAuth>} />
+
         <Route path="/check-in" element={<RequireAuth><><TopNav/><CheckIn/></></RequireAuth>} />
         <Route path="/inspections" element={<RequireAuth><><TopNav/><Inspections/></></RequireAuth>} />
         <Route path="/ro" element={<RequireAuth><><TopNav/><ROManager/></></RequireAuth>} />
@@ -152,7 +150,7 @@ export default function App() {
 
         {/* Admin submenu */}
         <Route path="/admin/shop" element={<RequireAuth><><TopNav/><ShopInfo/></></RequireAuth>} />
-        <Route path="/admin/calendar" element={<RequireAuth><><TopNav/><AdminCalendar/></></RequireAuth>} />
+        <Route path="/admin/calendar" element={<RequireAuth><><TopNav/><CalendarOptions/></></RequireAuth>} />
         <Route path="/admin/users" element={<RequireAuth><><TopNav/><AdminUsers/></></RequireAuth>} />
         <Route path="/admin/payroll" element={<RequireAuth><><TopNav/><AdminPayroll/></></RequireAuth>} />
         <Route path="/admin/plan" element={<RequireAuth><><TopNav/><AdminPlan/></></RequireAuth>} />
