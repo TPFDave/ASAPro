@@ -7,6 +7,7 @@ import Login from "./auth/Login.jsx";
 import SignUp from "./auth/SignUp.jsx";
 import Logout from "./auth/Logout.jsx";
 import ShopSetup from "./setup/ShopSetup.jsx";
+import ShopInfo from "./admin/ShopInfo.jsx";
 
 // ---- UI helpers ---- //
 const Container = ({ children }) => <div className="mx-auto w-full max-w-screen-2xl p-4">{children}</div>;
@@ -150,7 +151,7 @@ export default function App() {
         <Route path="/customers" element={<RequireAuth><><TopNav/><Customers/></></RequireAuth>} />
 
         {/* Admin submenu */}
-        <Route path="/admin/shop" element={<RequireAuth><><TopNav/><AdminShop/></></RequireAuth>} />
+        <Route path="/admin/shop" element={<RequireAuth><><TopNav/><ShopInfo/></></RequireAuth>} />
         <Route path="/admin/calendar" element={<RequireAuth><><TopNav/><AdminCalendar/></></RequireAuth>} />
         <Route path="/admin/users" element={<RequireAuth><><TopNav/><AdminUsers/></></RequireAuth>} />
         <Route path="/admin/payroll" element={<RequireAuth><><TopNav/><AdminPayroll/></></RequireAuth>} />
