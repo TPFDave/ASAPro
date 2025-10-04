@@ -46,3 +46,9 @@ Then open the printed localhost URL (usually http://localhost:5173).
 - `chore: upgrade deps`
 - `refactor: split calendar into appointments`
 
+
+
+## Shop Setup Wizard
+- After signup, navigate to `/setup` to create your initial shop settings.
+- Data is written to `shops/{auth.uid}/settings/basic` in Firestore.
+- Be sure Firestore is enabled in your Firebase project.

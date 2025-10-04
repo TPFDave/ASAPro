@@ -6,6 +6,7 @@ import RequireAuth from "./auth/RequireAuth.jsx";
 import Login from "./auth/Login.jsx";
 import SignUp from "./auth/SignUp.jsx";
 import Logout from "./auth/Logout.jsx";
+import ShopSetup from "./setup/ShopSetup.jsx";
 
 // ---- UI helpers ---- //
 const Container = ({ children }) => <div className="mx-auto w-full max-w-screen-2xl p-4">{children}</div>;
@@ -140,6 +141,7 @@ export default function App() {
         <Route path="/about" element={<About/>} />
 
         {/* Authenticated */}
+        <Route path="/setup" element={<RequireAuth><ShopSetup/></RequireAuth>} />
         <Route path="/dashboard" element={<RequireAuth><><TopNav/><Dashboard/></></RequireAuth>} />
         <Route path="/calendar" element={<RequireAuth><><TopNav/><Calendar/></></RequireAuth>} />
         <Route path="/check-in" element={<RequireAuth><><TopNav/><CheckIn/></></RequireAuth>} />

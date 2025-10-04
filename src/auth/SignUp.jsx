@@ -17,7 +17,7 @@ export default function SignUp() {
     try {
       const cred = await createUserWithEmailAndPassword(auth, email.trim(), password);
       if (name) await updateProfile(cred.user, { displayName: name });
-      nav("/dashboard", { replace: true });
+      nav("/setup", { replace: true });
     } catch (err) {
       setError(err.message || "Failed to create account");
     } finally { setBusy(false); }
