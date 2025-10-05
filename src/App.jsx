@@ -1,15 +1,31 @@
+// src/App.jsx
 import React, { useState } from "react";
 import { Routes, Route, NavLink, useNavigate } from "react-router-dom";
-import { Wrench, LayoutDashboard, CalendarDays, LogIn, LogOut, ClipboardList, FileText, Users, Settings, CreditCard, LifeBuoy, Building2, ChevronDown } from "lucide-react";
+import {
+  Wrench, LayoutDashboard, CalendarDays, LogIn, LogOut, ClipboardList,
+  FileText, Users, Settings, CreditCard, LifeBuoy, Building2, ChevronDown
+} from "lucide-react";
+
 import { AuthProvider } from "./auth/AuthProvider.jsx";
 import RequireAuth from "./auth/RequireAuth.jsx";
 import Login from "./auth/Login.jsx";
 import SignUp from "./auth/SignUp.jsx";
 import Logout from "./auth/Logout.jsx";
+
 import ShopSetup from "./setup/ShopSetup.jsx";
 import ShopInfo from "./admin/ShopInfo.jsx";
 import CalendarOptions from "./admin/CalendarOptions.jsx";
 import CalendarRouter from "./calendar/CalendarRouter.jsx";
+import AdminUsers from "./admin/Users.jsx";
+import TimeClock from "./components/TimeClock.jsx";
+import AdminPayroll from "./admin/Payroll.jsx";
+import AdminSupport from "./admin/Support.jsx";
+import Customers from "./customers/Customers.jsx";
+import CheckIn from "./checkin/CheckIn.jsx";
+import Dashboard from "./dashboard/Dashboard.jsx";
+
+// NEW: mobile-first inspections router
+import InspectionsRouter from "./inspections/InspectionsRouter.jsx";
 
 const Container = ({ children }) => <div className="mx-auto w-full max-w-screen-2xl p-4">{children}</div>;
 
@@ -115,16 +131,10 @@ const Welcome = () => (
 
 const About = () => <Container><Placeholder title="About Us & Updates" subtitle="Roadmap, changelog, contact."/></Container>;
 
-// ---- Protected screens ---- //
-const Dashboard = () => <Container><Placeholder title="Account Dashboard" subtitle="KPIs: today’s appts, approvals, inspections in-progress."/></Container>;
-const CheckIn = () => <Container><Placeholder title="Check-In" subtitle="Customer/vehicle intake with VIN scan."/></Container>;
-const Inspections = () => <Container><Placeholder title="Inspections" subtitle="Mobile-first inspections, photo capture."/></Container>;
+// ---- Optional placeholders kept for now ---- //
+const InspectionsPlaceholder = () => <Container><Placeholder title="Inspections" subtitle="Mobile-first inspections, photo capture."/></Container>;
 const ROManager = () => <Container><Placeholder title="RO Manager" subtitle="Estimates, approvals, repair orders."/></Container>;
-const Customers = () => <Container><Placeholder title="Customer Database" subtitle="CRM with vehicles & history."/></Container>;
-const AdminUsers = () => <Container><Placeholder title="Admin — Users" subtitle="Create accounts, roles, access."/></Container>;
-const AdminPayroll = () => <Container><Placeholder title="Admin — Payroll" subtitle="Time clock reports, adjustments, export."/></Container>;
 const AdminPlan = () => <Container><Placeholder title="Admin — Plan Options" subtitle="Subscription, limits, invoices."/></Container>;
-const AdminSupport = () => <Container><Placeholder title="Admin — Support" subtitle="Help center, contact, status."/></Container>;
 
 export default function App() {
   return (
@@ -144,7 +154,8 @@ export default function App() {
         <Route path="/calendar" element={<RequireAuth><><TopNav/><CalendarRouter/></></RequireAuth>} />
 
         <Route path="/check-in" element={<RequireAuth><><TopNav/><CheckIn/></></RequireAuth>} />
-        <Route path="/inspections" element={<RequireAuth><><TopNav/><Inspections/></></RequireAuth>} />
+        {/* UPDATED: real inspections router (mobile-first, with prefill via ?apptId=...) */}
+        <Route path="/inspections" element={<RequireAuth><><TopNav/><InspectionsRouter/></></RequireAuth>} />
         <Route path="/ro" element={<RequireAuth><><TopNav/><ROManager/></></RequireAuth>} />
         <Route path="/customers" element={<RequireAuth><><TopNav/><Customers/></></RequireAuth>} />
 
