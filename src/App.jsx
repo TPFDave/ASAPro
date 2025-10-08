@@ -23,6 +23,7 @@ import AdminSupport from "./admin/Support.jsx";
 import Customers from "./customers/Customers.jsx";
 import CheckIn from "./checkin/CheckIn.jsx";
 import Dashboard from "./dashboard/Dashboard.jsx";
+import AdminRecords from "./admin/Records.jsx";
 
 // NEW: mobile-first inspections router
 import InspectionsRouter from "./inspections/InspectionsRouter.jsx";
@@ -77,6 +78,7 @@ const TopNav = () => {
                 <DropdownLink to="/admin/calendar" label="CALENDAR OPTIONS" icon={<CalendarDays className="h-4 w-4"/>} />
                 <DropdownLink to="/admin/users" label="USERS" icon={<Users className="h-4 w-4"/>} />
                 <DropdownLink to="/admin/payroll" label="PAYROLL" icon={<FileText className="h-4 w-4"/>} />
+                <DropdownLink to="/admin/records" label="RECORDS" icon={<FileText className="h-4 w-4" />} />
                 <DropdownLink to="/admin/plan" label="PLAN OPTIONS" icon={<CreditCard className="h-4 w-4"/>} />
                 <DropdownLink to="/admin/support" label="SUPPORT" icon={<LifeBuoy className="h-4 w-4"/>} />
               </div>
@@ -163,6 +165,7 @@ export default function App() {
         <Route path="/admin/shop" element={<RequireAuth><><TopNav/><ShopInfo/></></RequireAuth>} />
         <Route path="/admin/calendar" element={<RequireAuth><><TopNav/><CalendarOptions/></></RequireAuth>} />
         <Route path="/admin/users" element={<RequireAuth><><TopNav/><AdminUsers/></></RequireAuth>} />
+        <Route path="/admin/records" element={<RequireAuth><><TopNav/><AdminRecords/></></RequireAuth>} />
         <Route path="/admin/payroll" element={<RequireAuth><><TopNav/><AdminPayroll/></></RequireAuth>} />
         <Route path="/admin/plan" element={<RequireAuth><><TopNav/><AdminPlan/></></RequireAuth>} />
         <Route path="/admin/support" element={<RequireAuth><><TopNav/><AdminSupport/></></RequireAuth>} />
